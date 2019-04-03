@@ -1,0 +1,55 @@
+<html>
+<head></head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script lang="js">
+        
+        async function run(){
+            const trainingUrl = 'wdbc-train.csv';
+            const trainingData = tf.data.csv(trainingUrl, {
+                columnConfigs: {
+                    diagnosis: {
+                        isLabel: true
+                    }
+                }
+            });
+            const convertedTrainingData =
+                  trainingData.map(({xs, ys}) => {
+                      return{ xs: Object.values(xs), ys: Object.values(ys)};
+                  }).batch(10);
+            
+            const testingUrl = 'wdbc-test.csv';
+            const testingData = tf.data.csv(testingUrl, {
+                columnConfigs: {
+                    diagnosis: {
+                        isLabel: true
+                    }
+                }
+            });
+            const convertedTestingData =
+                  testingData.map(({xs, ys}) => {
+                      return{ xs: Object.values(xs), ys: Object.values(ys)};
+                  }).batch(10);
+
+            const numOfFeatures = (await trainingData.columnNames()).length - 1;
+            
+            const model = tf.sequential();
+            model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "relu", units: 16}))
+            model.add(tf.layers.dense({activation: "relu", units: 8}));
+            model.add(tf.layers.dense({activation: "relu", units: 6}));
+            model.add(tf.layers.dense({activation: "sigmoid", units: 1}));
+            model.compile({loss: "binaryCrossentropy", optimizer: "rmsprop", metrics: ['accuracy']});
+            
+            await model.fitDataset(convertedTrainingData, 
+                             {epochs:100,
+                              validationData: convertedTestingData,
+                              callbacks:{
+                                  onEpochEnd: async(epoch, logs) =>{
+                                      console.log("Epoch: " + epoch + " Loss: " + logs.loss + " Accuracy: " + logs.acc);
+                                  }
+                              }});            
+        }
+        run();
+    </script>
+<body>
+</body>
+</html>
