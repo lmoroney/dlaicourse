@@ -27,7 +27,7 @@
             const model = tf.sequential();
             model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "sigmoid", units: 5}))
             model.add(tf.layers.dense({activation: "softmax", units: 3}));
-            model.compile({loss: "meanSquaredError", optimizer: tf.train.adam(0.06)});
+            model.compile({loss: "categoricalCrossentropy", optimizer: tf.train.adam(0.06)});
             
             await model.fitDataset(convertedData, 
                              {epochs:100,
@@ -37,9 +37,10 @@
                                   }
                               }});
             
-            const testVal = tf.tensor2d([5.8, 2.7, 5.1, 1.9], [1, 4]);
+            const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [1, 4]);
             const prediction = model.predict(testVal);
-            alert(prediction);
+            alert(prediction)
+            
         }
         run();
     </script>
