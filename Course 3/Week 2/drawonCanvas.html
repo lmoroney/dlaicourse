@@ -1,0 +1,57 @@
+ <html>
+	 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script type="text/javascript">
+    var canvas, ctx
+	var pos = {x:0, y:0};
+	var rawImage;
+    function init() {
+        canvas = document.getElementById('canvas');
+        rawImage = document.getElementById('canvasimg');
+        ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0,0,280,280);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mousedown", setPosition);
+        canvas.addEventListener("mouseenter", setPosition);
+    }
+    
+    function setPosition(e){
+		pos.x = e.clientX-100;
+		pos.y = e.clientY-100;
+    }
+    
+    function draw(e) {
+		if(e.buttons!=1) return;
+		ctx.beginPath();
+		ctx.lineWidth = 8;
+		ctx.lineCap = 'round';
+		ctx.strokeStyle = 'black';
+		ctx.moveTo(pos.x, pos.y);
+		setPosition(e);
+		ctx.lineTo(pos.x, pos.y);
+		ctx.stroke();
+		rawImage.src = canvas.toDataURL('image/png');
+	}
+    
+    function erase() {
+		ctx.clearRect(0, 0, 280, 280);
+		document.getElementById("canvasimg").style.display = "none";
+    }
+    
+    function save() {
+
+		//convertedImage = tf.image.resizeBilinear(rawImage, [28, ,28]);
+		raw = tf.browser.fromPixels(rawImage,1);
+		resized = tf.image.resizeBilinear(raw, [28,28]);
+		tensor = resized.expandDims(0);
+		tensor.print();
+		
+    }
+    </script>
+    <body onload="init()">
+        <canvas id="canvas" width="280" height="280" style="position:absolute;top:100;left:100;border:8px solid;"></canvas>
+        <img id="canvasimg" style="position:absolute;top:10%;left:52%;width=280;height=280;display:none;">
+        <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:400;left:100;">
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:400;left:160;">
+    </body>
+    </html>
