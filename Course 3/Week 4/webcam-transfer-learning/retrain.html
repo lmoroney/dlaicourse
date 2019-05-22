@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="webcam.js"></script>
+<script src="rps-dataset.js"></script>
+</head>
+<body>
+	<div>
+		<div>
+			<video autoplay playsinline muted id="wc" width="224" height="224"></video>
+		</div>
+	</div>
+	<button type="button" id="0" onclick="handleButton(this)" >Rock</button>
+	<button type="button" id="1" onclick="handleButton(this)" >Paper</button>
+	<button type="button" id="2" onclick="handleButton(this)" >Scissors</button>
+	<div id="rocksamples">Rock Samples:</div>
+	<div id="papersamples">Paper Samples:</div>
+	<div id="scissorssamples">Scissors Samples:</div>
+	<button type="button" id="train" onclick="doTraining()" >Train Network</button>
+	<div id="dummy">Once training is complete, click 'Start Predicting' to see predictions, and 'Stop Predicting' to end</div>
+	<button type="button" id="startPredicting" onclick="startPredicting()" >Start Predicting</button>
+	<button type="button" id="stopPredicting" onclick="stopPredicting()" >Stop Predicting</button>
+	<div id="prediction"></div>
+</body>
+
+<script src="index.js"></script>
+</html>
