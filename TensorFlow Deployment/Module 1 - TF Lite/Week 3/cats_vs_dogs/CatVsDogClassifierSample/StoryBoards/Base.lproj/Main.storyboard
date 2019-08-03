@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CatVsDogClassifierSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Njf-fb-sSl">
+                                <rect key="frame" x="20" y="151" width="335" height="496"/>
+                                <color key="backgroundColor" red="0.90939384700000003" green="0.4380967617" blue="0.49799424409999998" alpha="0.00074290644171779146" colorSpace="custom" customColorSpace="displayP3"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eht-wt-UCW">
+                                    <size key="itemSize" width="140" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IMAGE_CELL" id="DOH-NA-dLG" customClass="ImageCell" customModule="CatVsDogClassifierSample" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="140" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bV1-Q8-Yt5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="140" height="135"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHb-pl-k7p">
+                                                    <rect key="frame" x="5" y="144" width="130" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Ume-2u-wuz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="bV1-Q8-Yt5" firstAttribute="leading" secondItem="DOH-NA-dLG" secondAttribute="leading" id="88z-1l-76M"/>
+                                            <constraint firstItem="UHb-pl-k7p" firstAttribute="leading" secondItem="DOH-NA-dLG" secondAttribute="leading" constant="5" id="QHl-mz-Hl6"/>
+                                            <constraint firstAttribute="bottom" secondItem="UHb-pl-k7p" secondAttribute="bottom" id="VhU-XJ-iQF"/>
+                                            <constraint firstAttribute="trailing" secondItem="bV1-Q8-Yt5" secondAttribute="trailing" id="Zv0-vj-5el"/>
+                                            <constraint firstItem="UHb-pl-k7p" firstAttribute="top" secondItem="bV1-Q8-Yt5" secondAttribute="bottom" constant="9" id="snb-D8-i1N"/>
+                                            <constraint firstItem="bV1-Q8-Yt5" firstAttribute="top" secondItem="DOH-NA-dLG" secondAttribute="top" id="wUc-a5-Oty"/>
+                                            <constraint firstAttribute="trailing" secondItem="UHb-pl-k7p" secondAttribute="trailing" constant="5" id="xOE-EF-Q2c"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="bV1-Q8-Yt5" id="bfL-rh-olF"/>
+                                            <outlet property="inferenceLabel" destination="UHb-pl-k7p" id="b0k-bk-Y6Y"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please click on the images to perform inference" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKW-Sg-ZZY">
+                                <rect key="frame" x="20" y="60" width="335" height="41"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YKW-Sg-ZZY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9ux-q4-dUx"/>
+                            <constraint firstItem="YKW-Sg-ZZY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="Pd5-5m-1lE"/>
+                            <constraint firstItem="YKW-Sg-ZZY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xkg-u9-axX"/>
+                            <constraint firstItem="Njf-fb-sSl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gAa-9h-cvP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKW-Sg-ZZY" secondAttribute="trailing" constant="20" id="jVM-hH-c18"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Njf-fb-sSl" secondAttribute="bottom" constant="20" id="rI3-KE-53z"/>
+                            <constraint firstItem="Njf-fb-sSl" firstAttribute="top" secondItem="YKW-Sg-ZZY" secondAttribute="bottom" constant="50" id="sz2-Hn-MpP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Njf-fb-sSl" secondAttribute="trailing" constant="20" id="tzR-JG-q4q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Njf-fb-sSl" id="GWK-Va-ccf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>

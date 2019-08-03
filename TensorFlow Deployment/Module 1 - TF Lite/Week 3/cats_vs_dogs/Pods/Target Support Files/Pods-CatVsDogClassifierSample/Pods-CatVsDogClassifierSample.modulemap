@@ -1,0 +1,6 @@
+framework module Pods_CatVsDogClassifierSample {
+  umbrella header "Pods-CatVsDogClassifierSample-umbrella.h"
+
+  export *
+  module * { export * }
+}
