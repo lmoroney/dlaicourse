@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Object Detection</string>
+    <string name="picture">Picture</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera and storage permission.</string>
+</resources>

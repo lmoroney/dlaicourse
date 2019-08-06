@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="frame_height">112dp</dimen>
+    <dimen name="image_button_padding">20dp</dimen>
+</resources>
