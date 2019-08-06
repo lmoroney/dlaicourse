@@ -16,7 +16,7 @@ pip install -r requirements.txt
 Next, to run the code on Raspberry Pi, use `classify.py` as follows:
 
 ```
-python3 classify.py --filename input.jpg --model_path mobilenet_v1_1.0_224_quant.tflite --label_path labels_mobilenet_quant_v1_224.txt
+python3 classify.py --filename dog.jpg --model_path mobilenet_v1_1.0_224_quant.tflite --label_path labels_mobilenet_quant_v1_224.txt
 ```
 
 We encourage you to look through all the available options in the code. 
