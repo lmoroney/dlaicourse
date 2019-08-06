@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tensorflow as tf
-# Enable eager execution for TF < 2.0
+from tflite_runtime.interpreter import Interpreter
+from PIL import Image
 import numpy as np
 import argparse
 
@@ -26,13 +26,9 @@ args = parser.parse_args()
 
 filename = args.filename
 model_path = args.model_path 
-size = [int(item) for item in args.size.split(',')]
-
-with open(model_path, 'rb') as f:
-    tflite_model = f.read()
 
 # Load TFLite model and allocate tensors
-interpreter = tf.lite.Interpreter(model_content=tflite_model)
+interpreter = Interpreter(model_path=model_path)
 interpreter.allocate_tensors()
 
 # Get input and output tensors.
@@ -40,19 +36,19 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
 # Read image
-img = tf.io.read_file(filename)
-img_tensor = tf.image.decode_image(img)
+img = Image.open(filename).convert('RGB')
 
 # Get input size
 input_shape = input_details[0]['shape']
 size = input_shape[:2] if len(input_shape) == 3 else input_shape[1:3]
 
 # Preprocess image
-img_tensor = tf.image.resize(img_tensor, size)
-img_tensor = img_tensor / 255.0
+img = img.resize(size)
+img = np.array(img, dtype=np.float32)
+img = img / 255.
 
 # Add a batch dimension
-input_data = tf.expand_dims(img_tensor, axis=0)
+input_data = np.expand_dims(img, axis=0)
 
 # Point the data to be used for testing and run the interpreter
 interpreter.set_tensor(input_details[0]['index'], input_data)

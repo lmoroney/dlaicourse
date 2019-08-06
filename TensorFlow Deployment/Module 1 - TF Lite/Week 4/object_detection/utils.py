@@ -15,7 +15,7 @@
 """Image and label map utility functions."""
 import logging
 import numpy as np
-import tensorflow as tf
+
 
 def create_category_index(categories):
   """Creates dictionary of COCO compatible categories keyed by category id.
@@ -64,14 +64,11 @@ def load_image(frame, new_size=(300, 300)):
   height, width, _ = frame.shape # Image shape
   new_width, new_height = new_size # Target shape 
 
-  # Calculate offsets between heights and widths
-  offset_height = (height - new_height) // 2
-  offset_width = (width - new_width) // 2
+  # Calculate the target image coordinates
+  left = (width - new_width) // 2
+  top = (height - new_height) // 2
+  right = (width + new_width) // 2
+  bottom = (height + new_height) // 2
 
-  # Crop to the biggest square in the center
-  image = tf.image.crop_to_bounding_box(frame, 
-                                        offset_height, 
-                                        offset_width, 
-                                        new_height, 
-                                        new_width)
-  return np.array(image)
+  image = frame[left: right, top: bottom, :]
+  return image

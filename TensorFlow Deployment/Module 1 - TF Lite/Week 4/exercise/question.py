@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tensorflow as tf
+from tflite_runtime.interpreter import Interpreter
+from PIL import Image
 import numpy as np
 import argparse
 
@@ -26,9 +27,6 @@ args = parser.parse_args()
 filename = args.filename
 model_path = args.model_path 
 
-with open(model_path, 'rb') as f:
-    tflite_model = f.read()
-
 labels = ['Rock', 'Paper', 'Scissors']
 
 # Load TFLite model and allocate tensors
@@ -40,9 +38,8 @@ interpreter = # YOUR CODE HERE
 input_details = # YOUR CODE HERE
 output_details = # YOUR CODE HERE
 
-# Read image
-img = tf.io.read_file(filename)
-img_tensor = tf.image.decode_image(img)
+# Read image with Pillow
+img = Image.open(filename).convert('RGB')
 
 # Get input size
 input_shape = input_details[0]['shape']
@@ -50,9 +47,11 @@ size = input_shape[:2] if len(input_shape) == 3 else input_shape[1:3]
 
 # Preprocess image
 # Resize the image
-img_tensor = # YOUR CODE HERE
+img = # YOUR CODE HERE
+# Convert to Numpy with float32 as the datatype
+img = # YOUR CODE HERE
 # Normalize the image
-img_tensor = # YOUR CODE HERE
+img = # YOUR CODE HERE
 
 # Add a batch dimension
 input_data = # YOUR CODE HERE

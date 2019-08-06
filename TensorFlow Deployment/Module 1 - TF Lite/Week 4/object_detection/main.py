@@ -59,7 +59,8 @@ if __name__ == '__main__':
           
             image = load_image(stream)
             boxes, scores, classes = detector.detect(image, args.confidence)
-            print(boxes, scores, classes)
+            for label, score in zip(classes, scores):
+                print(label, score)
   
             if len(boxes) > 0:
                 draw_bounding_boxes_on_image_array(image, boxes, display_str_list=classes)
