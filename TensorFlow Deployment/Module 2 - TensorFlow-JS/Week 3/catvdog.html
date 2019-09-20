@@ -1,0 +1,23 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<head></head>
+<body>
+	<img id="imgcanvas" height="150" width="150" src="cat.jpg"></img>
+    <div id="output" style="font-family:courier;font-size:24px;height=300px"></div>
+</body>
+<script>
+	async function run(){
+		const image = tf.browser.fromPixels(imgcanvas);
+		const resized_image = tf.image.resizeBilinear(image, [150,150]).toFloat();
+		const offset = tf.scalar(255.0);
+		const normalized = tf.scalar(1.0).sub(resized_image.div(offset));
+		const batchedImage = normalized.expandDims(0);
+		const MODEL_URL = 'http://127.0.0.1:8887/model.json';
+        const model = await tf.loadLayersModel(MODEL_URL);
+        const result = model.predict(batchedImage);
+        result.print();
+
+	}
+	run();
+</script>
+</html>
