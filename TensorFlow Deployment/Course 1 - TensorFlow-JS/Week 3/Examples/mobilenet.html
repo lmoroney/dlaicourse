@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script> 
+</head>
+<body>
+    <img id="img" src="coffee.jpg"></img>
+    <div id="output" style="font-family:courier;font-size:24px;height=300px"></div>
+</body>
+<script>
+    const img = document.getElementById('img');
+    const outp = document.getElementById('output');
+    mobilenet.load().then(model => {
+        model.classify(img).then(predictions => {
+            console.log(predictions);
+            for(var i = 0; i<predictions.length; i++){
+                outp.innerHTML += "<br/>" + predictions[i].className + " : " + predictions[i].probability;
+            }
+        });
+    });
+</script>
+</html>
