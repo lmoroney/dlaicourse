@@ -25,7 +25,7 @@
             // a one-hot encoded array of label values like we did in the
             // Iris dataset example. 
             const convertedTrainingData = // YOUR CODE HERE
-                  trainingData.map({xs, ys}) => {
+                  trainingData.map(({xs, ys}) => {
                     const labels = [
                         ys.diagnosis == 0 ? 1 : 0
                     ]
@@ -54,7 +54,7 @@
             // a one-hot encoded array of label values like we did in the
             // Iris dataset example. 
             const convertedTestingData = // YOUR CODE HERE
-                  testingData.map({xs, ys}) => {
+                  testingData.map(({xs, ys}) => {
                     labels = [
                         ys.diagnosis == 0 ? 1 : 0
                     ]
