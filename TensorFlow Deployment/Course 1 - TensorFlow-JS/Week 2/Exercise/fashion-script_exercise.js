@@ -27,7 +27,7 @@ function getModel() {
 
 async function train(model, data) {
         
-    // Set the following metrics for the callback: 'loss', 'val_loss', 'acc', 'val_acc'.
+    // Set the following metrics for the callback: 'loss', 'val_loss', 'accuracy', 'val_accuracy'.
     const metrics = // YOUR CODE HERE    
 
         
