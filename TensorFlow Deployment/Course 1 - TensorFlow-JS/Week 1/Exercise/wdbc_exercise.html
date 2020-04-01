@@ -78,17 +78,17 @@
             const model = tf.sequential();
             
             // YOUR CODE HERE
-            model.add(tf.layers.dense({ inputShape: [numOfFeatures], activation: "sigmoid", units: 7 }));
-            model.add(tf.layers.dense({ activation: "relu", units: 5 }));
-            model.add(tf.layers.dense({ activation: "relu", units: 5 }));
-            model.add(tf.layers.dense({ inputShape: [numOfFeatures], activation: "sigmoid", units: 7 }));           
+            model.add(tf.layers.dense({ inputShape: [numOfFeatures], activation: "relu", units: 10 }));
+            model.add(tf.layers.dense({ inputShape:10, activation: "relu", units: 10 }));
+           
+            model.add(tf.layers.dense({ activation: "sigmoid", units: 1 }));           
             
             // Compile the model using the binaryCrossentropy loss, 
             // the rmsprop optimizer, and accuracy for your metrics. 
             model.compile( {loss: "binaryCrossentropy", optimizer: "rmsprop",metrics:["accuracy"]});// YOUR CODE HERE);
             
             
-            await model.fitDataset(convertedTrainingData, 
+            await model.fitDataset(convertedTestingData, 
                              {epochs:100,
                               validationData: convertedTestingData,
                               callbacks:{
