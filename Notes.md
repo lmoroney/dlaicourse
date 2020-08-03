@@ -54,3 +54,10 @@ const convertedData =
 <!--This is to do One Hot encoding on a dictionary-->
 ```
 
+# Using the Web Server
+
+For the remaining examples and exercises in this course you will need to run a web server locally on your machine. This is because in javascript every call has to be done through and HTTP request. Therefore, even if you have your files locally, you can't just load them directly, you have to make an HTTP request to those files. This is what the Web Server for Chrome App is used for.
+
+
+
+https://github.com/tensorflow/tfjs/tree/master/tfjs-vis
