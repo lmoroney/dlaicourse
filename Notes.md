@@ -61,3 +61,9 @@ For the remaining examples and exercises in this course you will need to run a w
 
 
 https://github.com/tensorflow/tfjs/tree/master/tfjs-vis
+
+https://github.com/tensorflow/tfjs-models In this link there are a lot of pre trained models to use in tensorflow.js
+
+
+
+There are several versions but they can be built upon for classification, detection, embeddings, and other segmentation similar to how other popular large-scale models, such as Inception are used. MobileNets trade-off between latency, size, and accuracy while comparing favorably with popular state of the art models. MobileNets are trained to recognize a thousand classes, and at [this][http://www.laurencemoroney.com/wp-content/uploads/2019/04/labels.txt] URL, you'll find a list of the supported classes, and here are just a few of them.
