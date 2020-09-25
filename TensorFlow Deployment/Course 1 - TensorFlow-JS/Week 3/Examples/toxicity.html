@@ -1,16 +1,24 @@
 <html>
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
 <script>
+// set threshold 
 const threshold = 0.9;
+
+// First load the model passing the threshold
+// then pass an array of sentences, then classify the sentences
+// and make prediction
 toxicity.load(threshold).then(model => {
-    const sentences = ['you suck'];
+    const sentences = ['you are stupid'];
     model.classify(sentences).then(predictions => {
+        // handle result (console.log shows the results)
         console.log(predictions);
         for(i=0; i<7; i++){
-            if(predictions[i].results[0].match){
-                console.log(predictions[i].label + 
+            // i<7 cause there are 7 possible results (iterate across all labels)
+            if(predictions[i].results[0].match){        // in case of a match being true
+                console.log(predictions[i].label +      // log out the label an the probability
                             " was found with probability of " + 
                             predictions[i].results[0].probabilities[1]);                
             }  

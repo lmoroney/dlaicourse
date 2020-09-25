@@ -1,7 +1,14 @@
 <html>
 <head></head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <!-- Load TensorFlow.js -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>-->
+    <!--Upper line gave me a Warning-->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
     <script lang="js">
+        
+        <!-- This is the async function used to train the model -->
+        <!-- The function just fits the x to the y and awaits for the return -->
+            
         async function doTraining(model){
             const history = 
                   await model.fit(xs, ys, 
@@ -17,13 +24,26 @@
                           }
                         });
         }
+        <!--Create Model-->
         const model = tf.sequential();
+        
+        <!--add a single dense layer containing a single neuron-->
+        <!--that takes a numeric input to a model using JavaScript-->
+        
         model.add(tf.layers.dense({units: 1, inputShape: [1]}));
         model.compile({loss:'meanSquaredError', 
                        optimizer:'sgd'});
         model.summary();
+        
+        <!-- These are the data for trining -->
+        
         const xs = tf.tensor2d([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], [6, 1]);
         const ys = tf.tensor2d([-3.0, -1.0, 2.0, 3.0, 5.0, 7.0], [6, 1]);
+        
+        <!--Then calls the train function and then predict-->
+        <!--Predict the value of [10] and spec of the array [1,1], one by one array-->
+        <!--Also an alert to show the value as a pop up box-->
+            
         doTraining(model).then(() => {
             alert(model.predict(tf.tensor2d([10], [1,1])));
         });

@@ -1,9 +1,18 @@
 <html>
 <head></head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <script lang="js">
+        
+        <!--Asynchronus funtion because we will be waitin some values of return-->
         async function run(){
+            
+            <!--URL to csv file, if there is no URL then will--> 
+            <!--try to load it from the same path the page its hosted-->
+            <!--Its not loading from the file system, its going through the http-->
+            <!--so it needs to run in a browser-->
+            
             const csvUrl = 'iris.csv';
+            
             const trainingData = tf.data.csv(csvUrl, {
                 columnConfigs: {
                     species: {
@@ -11,25 +20,38 @@
                     }
                 }
             });
+            <!--You have tospecify the label for Tensorflow using isLabel-->
+            <!--The first line in the CSV should be the colum names-->
             
-            const numOfFeatures = (await trainingData.columnNames()).length - 1;
-            const numOfSamples = 150;
+            const numOfFeatures = (await trainingData.columnNames()).length - 1;  //minus 1 cause of the label
+            const numOfSamples = 150;                                           // size of the dataset (rows)
+            
+            <!--The data comebacks as dictionaries so we want to convert it into arrays-->
+            <!--The trainingData.map method allows to do OneHot encoding-->
+                
             const convertedData =
                   trainingData.map(({xs, ys}) => {
                       const labels = [
-                            ys.species == "setosa" ? 1 : 0,
+                            ys.species == "setosa" ? 1 : 0,  <!--Ask for setosa, if true then 1, else 0-->
                             ys.species == "virginica" ? 1 : 0,
                             ys.species == "versicolor" ? 1 : 0
                       ] 
-                      return{ xs: Object.values(xs), ys: Object.values(labels)};
+                      return{ xs: Object.values(xs), ys: Object.values(labels)}; //convert xs to array and ys converted to labels
                   }).batch(10);
             
+            <!--First define the model-->
             const model = tf.sequential();
+            
+            <!--Add the hidden layer with 5 neurons and the input layer with the number of features-->
             model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "sigmoid", units: 5}))
+            
+            // Add the output layer
             model.add(tf.layers.dense({activation: "softmax", units: 3}));
             
             model.compile({loss: "categoricalCrossentropy", optimizer: tf.train.adam(0.06)});
+            model.summary();
             
+            // Fit the model passing the convertedData
             await model.fitDataset(convertedData, 
                              {epochs:100,
                               callbacks:{
@@ -41,7 +63,7 @@
             // Test Cases:
             
             // Setosa
-            const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [1, 4]);
+            const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [1, 4]); <!--Input tensor-->
             
             // Versicolor
             // const testVal = tf.tensor2d([6.4, 3.2, 4.5, 1.5], [1, 4]);
@@ -56,6 +78,7 @@
             
             // alert(prediction)
             alert(classNames[pIndex])
+            // alert(prediction)
             
         }
         run();
