@@ -53,6 +53,7 @@ if __name__ == '__main__':
 
     with picamera.PiCamera() as camera:
         camera.resolution = (640, 480)
+        camera.framerate=10
         while True:
             stream = np.empty((480, 640, 3), dtype=np.uint8)
             camera.capture(stream, 'rgb')
