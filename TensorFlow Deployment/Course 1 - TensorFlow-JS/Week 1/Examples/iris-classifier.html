@@ -11,7 +11,7 @@
                     }
                 }
             });
-            
+
             const numOfFeatures = (await trainingData.columnNames()).length - 1;
             const numOfSamples = 150;
             const convertedData =
@@ -20,43 +20,43 @@
                             ys.species == "setosa" ? 1 : 0,
                             ys.species == "virginica" ? 1 : 0,
                             ys.species == "versicolor" ? 1 : 0
-                      ] 
+                      ]
                       return{ xs: Object.values(xs), ys: Object.values(labels)};
                   }).batch(10);
-            
+
             const model = tf.sequential();
             model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "sigmoid", units: 5}))
             model.add(tf.layers.dense({activation: "softmax", units: 3}));
-            
+
             model.compile({loss: "categoricalCrossentropy", optimizer: tf.train.adam(0.06)});
-            
-            await model.fitDataset(convertedData, 
+
+            await model.fitDataset(convertedData,
                              {epochs:100,
                               callbacks:{
                                   onEpochEnd: async(epoch, logs) =>{
                                       console.log("Epoch: " + epoch + " Loss: " + logs.loss);
                                   }
                               }});
-            
+
             // Test Cases:
-            
+
             // Setosa
-            const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [1, 4]);
-            
+            const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [4, 1]);
+
             // Versicolor
-            // const testVal = tf.tensor2d([6.4, 3.2, 4.5, 1.5], [1, 4]);
-            
+            // const testVal = tf.tensor2d([6.4, 3.2, 4.5, 1.5], [4, 1]);
+
             // Virginica
-            // const testVal = tf.tensor2d([5.8,2.7,5.1,1.9], [1, 4]);
-            
+            // const testVal = tf.tensor2d([5.8,2.7,5.1,1.9], [4, 1]);
+
             const prediction = model.predict(testVal);
             const pIndex = tf.argMax(prediction, axis=1).dataSync();
-            
+
             const classNames = ["Setosa", "Virginica", "Versicolor"];
-            
+
             // alert(prediction)
             alert(classNames[pIndex])
-            
+
         }
         run();
     </script>
