@@ -20,12 +20,12 @@
                             ys.species == "setosa" ? 1 : 0,
                             ys.species == "virginica" ? 1 : 0,
                             ys.species == "versicolor" ? 1 : 0
-                      ] 
+                      ]; 
                       return{ xs: Object.values(xs), ys: Object.values(labels)};
                   }).batch(10);
             
             const model = tf.sequential();
-            model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "sigmoid", units: 5}))
+            model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "sigmoid", units: 5}));
             model.add(tf.layers.dense({activation: "softmax", units: 3}));
             
             model.compile({loss: "categoricalCrossentropy", optimizer: tf.train.adam(0.06)});
@@ -55,7 +55,7 @@
             const classNames = ["Setosa", "Virginica", "Versicolor"];
             
             // alert(prediction)
-            alert(classNames[pIndex])
+            alert(classNames[pIndex]);
             
         }
         run();
