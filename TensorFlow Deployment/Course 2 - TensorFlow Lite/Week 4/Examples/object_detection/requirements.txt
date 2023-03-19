@@ -1,5 +1,5 @@
 matplotlib==3.0.3
-numpy==1.16.4
+numpy==1.22.0
 picamera==1.13
 Pillow==6.1.0
 python-tk==0.1
