@@ -1,21 +1,28 @@
 <html>
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<!--Latest tensorflow.js-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>-->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+<!--Library for capturing images and converting in tensors-->
 <script src="webcam.js"></script>
+<!--Load Dataset-->
 <script src="rps-dataset.js"></script>
 </head>
 <body>
 	<div>
 		<div>
+            <!--This video tag defines video on the page-->
 			<video autoplay playsinline muted id="wc" width="224" height="224"></video>
 		</div>
 	</div>
 	<button type="button" id="0" onclick="handleButton(this)" >Rock</button>
 	<button type="button" id="1" onclick="handleButton(this)" >Paper</button>
 	<button type="button" id="2" onclick="handleButton(this)" >Scissors</button>
+	<button type="button" id="3" onclick="handleButton(this)" >Spock</button>
 	<div id="rocksamples">Rock Samples:</div>
 	<div id="papersamples">Paper Samples:</div>
 	<div id="scissorssamples">Scissors Samples:</div>
+    <div id="spocksamples">Spock Samples:</div>
 	<button type="button" id="train" onclick="doTraining()" >Train Network</button>
 	<div id="dummy">Once training is complete, click 'Start Predicting' to see predictions, and 'Stop Predicting' to end</div>
 	<button type="button" id="startPredicting" onclick="startPredicting()" >Start Predicting</button>

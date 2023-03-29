@@ -43,6 +43,7 @@ export class MnistData {
 
   async load() {
     // Make a request for the MNIST sprited image.
+    // Download the labels and decode them
     const img = new Image();
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
